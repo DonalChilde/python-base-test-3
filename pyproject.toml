@@ -1,0 +1,98 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+keywords = ['python']
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+
+    "License :: OSI Approved :: MIT License",
+
+]
+name = "python-base-test-3"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Chad Lowe" },
+    { email = "pfmsoft.dev@gmail.com" },
+]
+dynamic = ["version", "description"]
+dependencies = ["click"]
+
+[project.scripts]
+python-base-test-3 = "python_base_test_3.python_base_test_3_cli:main"
+
+[project.urls]
+Documentation = "https://github.com/DonalChilde/python-base-test-3#readme"
+Documentation_rtd = "https://python-base-test-3.readthedocs.io"
+Issues = "https://github.com/DonalChilde/python-base-test-3/issues"
+Source = "https://github.com/DonalChilde/python-base-test-3"
+
+
+[project.optional-dependencies]
+dev = [
+
+    # Automation
+    "nox",
+    "pre-commit",
+
+    # Linting and Formatting
+    "black",
+    "isort",
+
+    # Tools
+    "pysnooper",
+]
+lint = ["pylint", "mypy"]
+doc = [
+    # Documentation
+    "Sphinx",
+    "sphinx-autobuild",
+    "sphinx-autodoc-typehints",
+    "sphinx_rtd_theme",
+    "myst-parser",
+    "sphinx-click",
+]
+vscode = ["esbonio", "rst2html", "rstcheck"]
+testing = ["pytest", "coverage", "pytest-cov"]
+
+
+[tool.isort]
+profile = "black"
+src_paths = ["src", "test"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+# https://pylint.pycqa.org/en/latest/user_guide/usage/run.html#command-line-options
+# https://pylint.pycqa.org/en/latest/user_guide/configuration/all-options.html#standard-checkers
+# pylint --generate-toml-config > ./pylint-toml-example.toml
+# [tool.pylint.messages_control]
+# disable = [
+#     "raw-checker-failed",
+#     "bad-inline-option",
+#     "locally-disabled",
+#     "file-ignored",
+#     "suppressed-message",
+#     "useless-suppression",
+#     "deprecated-pragma",
+#     "use-symbolic-message-instead"
+# ]
+
+[tool.pylint.format]
+# for black compatability
+max-line-length = "95"
+
+
+[tool.coverage.run]
+branch = true
+parallel = true
+# omit = [""]
